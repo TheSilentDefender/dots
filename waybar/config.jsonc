@@ -1,0 +1,123 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passtrough": false,
+    "gtk-layer-shell": true,
+    "height": 0,
+    "modules-left": [
+        "wlr/workspaces",
+        "cpu",
+        "memory",
+        "temperature",
+        "network"
+    ],
+    "modules-center": ["custom/spotify"],
+    "modules-right": [
+        "tray",
+        "battery",
+        "pulseaudio",
+        "pulseaudio#microphone",
+        "clock"
+    ],
+
+    "hyprland/window": {
+        "format": "{}"
+    },
+    "wlr/workspaces": {
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "on-click": "activate",
+        "format": "{icon}",
+        "format-icons": {
+            "urgent": "",
+            "active": "",
+            "default": ""
+          }
+    },
+    "cpu": {
+        "interval": 10,
+        "format": " {}%",
+        "max-length": 10
+    },
+    "memory": {
+        "interval": 30,
+        "format": "  {used}",
+        "max-length": 10,
+        "tooltip": false
+    },
+    "battery": {
+        "format": "{icon}  {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "format-time": "{H}h{M}m",
+        "format-charging": "  {capacity}%",
+        "format-full": "  Full",
+        "interval": 30,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "tooltip": true,
+        "tooltip-format": "{time}"
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format-critical": "{temperatureC}°C ",
+        "format": "{temperatureC}°C ",
+        "tooltip": false
+    },
+    "tray": {
+        "icon-size": 13,
+        "tooltip": false,
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{: %R   %d/%m}"
+        },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "tooltip": true,
+        "tooltip-format": "{desc}",
+        "format-muted": " Muted",
+        "on-click": "amixer set Master toggle",
+        "on-scroll-up": "amixer -q sset Master 2%+",
+        "on-scroll-down": "amixer -q sset Master 2%-",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "default": ["", "", ""]
+        }
+    },
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "tooltip": false,
+        "format-source": " {volume}%",
+        "format-source-muted": " Muted",
+        "on-click": "pamixer --default-source -t",
+        "on-scroll-up": "pamixer --default-source -i 5",
+        "on-scroll-down": "pamixer --default-source -d 5",
+        "scroll-step": 5
+    },
+    "network": {
+        "on-click": "kitty -e nmtui",
+        "interval": 5,
+        "format": "{icon}  {essid}  {bandwidthUpBits}  {bandwidthDownBits}",
+        "format-icons": {
+            "wifi": "",
+            "ethernet": "󰈀",
+            "default": ""
+          },
+          "tooltip": false
+    },
+    "custom/spotify": {
+        "exec": "python3 ~/.config/waybar/mediaplayer.py --player spotify",
+        "format": "{}   ",
+        "return-type": "json",
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous"
+    }
+}
