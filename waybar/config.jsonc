@@ -11,9 +11,10 @@
         "cpu",
         "memory",
         "temperature",
-        "network"
+        "network",
+        "bluetooth"
     ],
-    "modules-center": ["custom/spotify"],
+    "modules-center": ["custom/media"],
     "modules-right": [
         "tray",
         "battery",
@@ -37,8 +38,7 @@
           }
     },
     "cpu": {
-        "interval": 10,
-        "format": " {}%",
+        "format": " {usage}%",
         "max-length": 10
     },
     "memory": {
@@ -97,17 +97,20 @@
         "format-source": " {volume}%",
         "format-source-muted": " Muted",
         "on-click": "pamixer --default-source -t",
-        "on-scroll-up": "pamixer --default-source -i 5",
-        "on-scroll-down": "pamixer --default-source -d 5",
+        "on-scroll-up": "pamixer --default-source -i 2",
+        "on-scroll-down": "pamixer --default-source -d 2",
         "scroll-step": 5
     },
     "network": {
-        "on-click": "kitty -e nmtui",
+        "on-click": "nm-connection-editor",
         "interval": 5,
-        "format": "{icon}  {essid}  {bandwidthUpBits}  {bandwidthDownBits}",
+        "format-wifi": "{icon}  {essid} ({signalStrength}%)  {bandwidthUpBits}  {bandwidthDownBits}",
+        "format-ethernet": "{icon}   {bandwidthUpBits}  {bandwidthDownBits}",
+        "format-disconnected": "{icon}",
         "format-icons": {
             "wifi": "",
             "ethernet": "󰈀",
+            "disconnected": "",
             "default": ""
           },
           "tooltip": false
@@ -119,5 +122,23 @@
         "on-click": "playerctl play-pause",
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous"
-    }
+    },
+    "bluetooth": {
+        "format": "󰂯",
+        "format-off": "󰂲",
+        "on-click": "blueman-manager",
+        "tooltip-format": "{status}"
+    },
+	"custom/media": {
+	    "format": "{icon} {}",
+	    "escape": true,
+	    "return-type": "json",
+	    "max-length": 40,
+	    "on-click": "playerctl play-pause",
+	    "on-click-right": "playerctl stop",
+	    "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+	    "on-scroll-up": "playerctl next",
+	    "on-scroll-down": "playerctl previous",
+	    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources/custom_modules folder
+	}
 }

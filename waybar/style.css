@@ -58,7 +58,8 @@ tooltip {
 #workspaces,
 #tray,
 #temperature,
-#custom-spotify {
+#custom-spotify,
+#bluetooth {
     background: #1e1e2e;
     padding: 0px 10px;
     margin: 3px 0px;
@@ -74,6 +75,7 @@ tooltip {
 #workspaces {
     background: #1e1e2e;
     border-radius: 10px;
+    margin-right: 10px;
     margin-left: 10px;
     padding-right: 0px;
     padding-left: 5px;
@@ -124,11 +126,11 @@ tooltip {
     border-right: 0px;
 }
 
-/* #pulseaudio.microphone {
+ #pulseaudio.microphone {
     color: #cba6f7;
     margin-right: 5px;
     border-radius: 0 10px 10px 0;
-} */
+}
 
 #battery {
     color: #a6e3a1;
@@ -146,4 +148,12 @@ tooltip {
 
 #temperature.critical {
     color: rgb(226, 28, 28);
+}
+
+#bluetooth {
+    color: rgb(135, 128, 240);
+    border-left: 0px;
+    border-right: 0px;
+    margin-left: 10px;
+
 }
